@@ -39,7 +39,7 @@ osx_version="$(sw_vers -productVersion)"
 osx_build="$(sw_vers -buildVersion)"
 
 # define OS Short Version 
-if [[ $(sw_vers -productVersion) == "10.15" ]] ; then
+if [[ $(sw_vers -productVersion) =~ "10.15" ]] ; then
   codename="macOS Catalina"
 else
   codename=$(xxd -ps /Applications/Utilities/System\ Information.app/Contents/MacOS/System\ Information | tr -d '\n' | perl -nle "print $& if m{00$(sw_vers -productVersion | awk -F '.' '{printf $1"."$2}' | xxd -ps)00\K.*?00}" | xxd -r -p)
